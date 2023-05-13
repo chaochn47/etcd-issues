@@ -1,4 +1,4 @@
-name: "Rerun failed jobs triggered by issue creation/re-opening"
+name: Rerun failed jobs
 on:
   issues:
     types: [opened, reopened]
@@ -9,6 +9,7 @@ env:
 
 jobs:
   rerun-failed-jobs:
+    name: Rerun failed jobs
     runs-on: ubuntu-latest
     if: ${{ !github.event.issue.pull_request }}
     steps:
@@ -16,7 +17,8 @@ jobs:
     - env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-#       FAILED_JOB_URL=$(echo "${TITLE}")
+        set -euo pipefail
+
         FAILED_JOB_URL=https://github.com/chaochn47/etcd-issues/actions/runs/4964403809/jobs/8884506137
         gh issue comment ${ISSUE_NUMBER} --body "I will be your bot for today, here is your [failed job](${FAILED_JOB_URL})."
         gh run rerun 4964403809 --failed
