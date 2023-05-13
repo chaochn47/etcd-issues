@@ -13,8 +13,7 @@ jobs:
     if: ${{ !github.event.issue.pull_request }}
     steps:
       - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - name: rerun-failed-jobs
-        env:
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
 #          FAILED_JOB_URL=$(echo "${TITLE}")
