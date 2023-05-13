@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !github.event.issue.pull_request }}
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-#          FAILED_JOB_URL=$(echo "${TITLE}")
-          FAILED_JOB_URL=https://github.com/chaochn47/etcd-issues/actions/runs/4964403809/jobs/8884506137
-          gh issue comment ${ISSUE_NUMBER} --body "I will be your bot for today, here is your [failed job](${FAILED_JOB_URL})."
-          gh run rerun 4964403809 --failed
-          gh issue close ${ISSUE_NUMBER} --comment "[failed job](${FAILED_JOB_URL}) restarted"--reason "completed"
+    - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+    - env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+#       FAILED_JOB_URL=$(echo "${TITLE}")
+        FAILED_JOB_URL=https://github.com/chaochn47/etcd-issues/actions/runs/4964403809/jobs/8884506137
+        gh issue comment ${ISSUE_NUMBER} --body "I will be your bot for today, here is your [failed job](${FAILED_JOB_URL})."
+        gh run rerun 4964403809 --failed
+        gh issue close ${ISSUE_NUMBER} --comment "[failed job](${FAILED_JOB_URL}) restarted"--reason "completed"
